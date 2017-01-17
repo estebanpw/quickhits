@@ -294,21 +294,21 @@ uint64_t getNumberOfSequences(FILE * f){
 }
 
 
-inline void strrev(char *p, char *d, uint32_t k){
+inline void strrev(unsigned char *p, unsigned char *d, uint32_t k){
     int i;
-    char c;
+    unsigned char c;
     for(i=0;i<k;i++){
-	c = p[k-i-1];
-	switch(c){
-	case 'A': c='T';
-	break;
-	case 'C': c='G';
-	break;
-	case 'G': c='C';
-	break;
-	case 'T': c='A';
-	break;
-	}
+    	c = p[k-i-1];
+    	switch(c){
+    	case ((unsigned char)'A'): c=((unsigned char)'T');
+    	break;
+    	case ((unsigned char)'C'): c=((unsigned char)'G');
+    	break;
+    	case ((unsigned char)'G'): c=((unsigned char)'C');
+    	break;
+    	case ((unsigned char)'T'): c=((unsigned char)'A');
+    	break;
+    	}
         d[i] = c; 
     }
   

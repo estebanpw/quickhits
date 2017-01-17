@@ -72,7 +72,7 @@ uint64_t getNumberOfSequences(FILE * f);
 /*
 	Reverses a string p in d
 */
-inline void strrev(char *p, char *d, uint32_t k);
+inline void strrev(unsigned char *p, unsigned char *d, uint32_t k);
 
 /* 
 	Returns the probability of x, given the distribution described by mu and sigma.

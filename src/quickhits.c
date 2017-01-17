@@ -23,7 +23,6 @@ USAGE       <query>            The .fasta file of the query file
 #include <ctype.h>
 #include <pthread.h>
 #include "structs.h"
-#include "binaryTreeFunctions.h"
 #include "commonFunctions.h"
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
@@ -83,7 +82,7 @@ int main(int argc, char ** av){
     //Current length of array and variables for the buffer
     uint64_t temp_len = 0, idx = 0, r = 0, query_len = 0, query_seqs;
     char * temp_seq_buffer = NULL;
-    unsigned char curr_kmer[FIXED_K];
+    unsigned char curr_kmer[FIXED_K], rev_curr_kmer[FIXED_K];
     curr_kmer[0] = '\0';
     uint64_t word_size = 0;
 
@@ -162,6 +161,7 @@ int main(int argc, char ** av){
     temp_len = 0; idx = 0; r = 0;
     idx = READBUF + 1;
     curr_kmer[0] = '\0';
+    rev_curr_kmer[0] = '\0';
 
 
     fprintf(out_database, "ID\tHits\tLen\tMU\t\tstdev\t\tPvalue\n");
@@ -187,6 +187,14 @@ int main(int argc, char ** av){
                 if(word_size == FIXED_K){
                     //ask hash table
                     
+                    hits += c_table->table[char_converter[curr_kmer[0]]][char_converter[curr_kmer[1]]][char_converter[curr_kmer[2]]]
+                    [char_converter[curr_kmer[3]]][char_converter[curr_kmer[4]]][char_converter[curr_kmer[5]]]
+                    [char_converter[curr_kmer[6]]][char_converter[curr_kmer[7]]][char_converter[curr_kmer[8]]]
+                    [char_converter[curr_kmer[9]]][char_converter[curr_kmer[10]]][char_converter[curr_kmer[11]]]
+                    [char_converter[curr_kmer[12]]][char_converter[curr_kmer[13]]];
+
+                    strrev(curr_kmer, rev_curr_kmer, FIXED_K);
+
                     hits += c_table->table[char_converter[curr_kmer[0]]][char_converter[curr_kmer[1]]][char_converter[curr_kmer[2]]]
                     [char_converter[curr_kmer[3]]][char_converter[curr_kmer[4]]][char_converter[curr_kmer[5]]]
                     [char_converter[curr_kmer[6]]][char_converter[curr_kmer[7]]][char_converter[curr_kmer[8]]]
